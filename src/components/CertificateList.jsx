@@ -164,10 +164,13 @@ export const CertificateList = () => {
   const [loading, setLoading] = useState(true); // Состояние загрузки
 
   const navigate = useNavigate()
+
+  const baseUrl = 'https://sycret.ru/service/api/api';
+
   // Функция для загрузки данных
   const fetchCertificates = async () => {
     try {
-      const response = await fetch("/api", {
+      const response = await fetch(`${baseUrl}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -245,7 +248,7 @@ export const CertificateList = () => {
             <button
                 style={{ marginTop: '10px' }}
                 onClick={() =>
-                    navigate('/contact', { state: { certId: selectedCertId } })
+                    navigate('/contact', { state: { certId: selectedCertificate.ID } })
                 }
                 >
                     Оформить
