@@ -1,31 +1,31 @@
-const fetch = require("node-fetch");
+// netlify/functions/proxy.js
+const fetch = await import('node-fetch');
 
-exports.handler = async (event) => {
-  const apiUrl = "https://sycret.ru/service/api/api";
-
+exports.handler = async (event, context) => {
+  const apiUrl = 'https://sycret.ru/service/api/api';
+  
   try {
-    // Пробрасываем тело и заголовки запроса к внешнему API
     const response = await fetch(apiUrl, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: event.body, // Передаем тело запроса из клиента
+      body: JSON.stringify({
+        ApiKey: "011ba11bdcad4fa396660c2ec447ef14", 
+        MethidName: "OSGetGoodList", 
+      }),
     });
 
     const data = await response.json();
 
-    // Возвращаем результат клиенту
     return {
-      statusCode: response.status,
+      statusCode: 200,
       body: JSON.stringify(data),
     };
-  } catch (error) {
-    // Обработка ошибок
-    console.error("Ошибка прокси-сервера:", error);
+  } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Ошибка на стороне прокси-сервера" }),
+      body: JSON.stringify({ error: 'Error fetching data' }),
     };
   }
 };

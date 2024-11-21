@@ -166,12 +166,46 @@ export const CertificateList = () => {
   const navigate = useNavigate()
 
 //   const baseUrl = 'https://sycret.ru/service/api/api';
-    const baseUrl = "/.netlify/functions/proxy";
+    const baseUrl = "../.netlify/functions/proxy";
   
   
     // Функция для загрузки данных
-  const fetchCertificates = async () => {
+//   const fetchCertificates = async () => {
+//     try {
+//       const response = await fetch(`${baseUrl}`, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           ApiKey: "011ba11bdcad4fa396660c2ec447ef14", // Ваш API Key
+//           MethodName: "OSGetGoodList", // Название метода
+//         }),
+//       });
+
+//       if (!response.ok) {
+//         throw new Error(`Ошибка HTTP: ${response.status}`);
+//       }
+
+//       const data = await response.json();
+
+//       if (data.result === 0) {
+//         setCertificates(data.data); // Устанавливаем список сертификатов
+//       } else {
+//         setError(data.resultdescription || "Ошибка загрузки данных");
+//       }
+//     } catch (err) {
+//       setError("Ошибка при подключении к серверу");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+// Функция для загрузки данных
+const fetchCertificates = async () => {
     try {
+      const { default: fetch } = await import('node-fetch'); // динамический импорт
+  
       const response = await fetch(`${baseUrl}`, {
         method: "POST",
         headers: {
@@ -179,16 +213,16 @@ export const CertificateList = () => {
         },
         body: JSON.stringify({
           ApiKey: "011ba11bdcad4fa396660c2ec447ef14", // Ваш API Key
-          MethidName: "OSGetGoodList", // Название метода
+          MethodName: "OSGetGoodList", // Название метода
         }),
       });
-
+  
       if (!response.ok) {
         throw new Error(`Ошибка HTTP: ${response.status}`);
       }
-
+  
       const data = await response.json();
-
+  
       if (data.result === 0) {
         setCertificates(data.data); // Устанавливаем список сертификатов
       } else {
@@ -200,6 +234,7 @@ export const CertificateList = () => {
       setLoading(false);
     }
   };
+  
 
   // Используем useEffect для вызова fetchCertificates при загрузке компонента
   useEffect(() => {
