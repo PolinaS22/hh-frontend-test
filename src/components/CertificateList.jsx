@@ -165,9 +165,11 @@ export const CertificateList = () => {
 
   const navigate = useNavigate()
 
-  const baseUrl = 'https://sycret.ru/service/api/api';
-
-  // Функция для загрузки данных
+//   const baseUrl = 'https://sycret.ru/service/api/api';
+    const baseUrl = "/.netlify/functions/proxy";
+  
+  
+    // Функция для загрузки данных
   const fetchCertificates = async () => {
     try {
       const response = await fetch(`${baseUrl}`, {
