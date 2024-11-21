@@ -157,7 +157,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 
-const CertificateList = () => {
+export const CertificateList = () => {
   const [certificates, setCertificates] = useState([]); // Список сертификатов
   const [selectedCertificate, setSelectedCertificate] = useState(null); // Выбранный сертификат
   const [error, setError] = useState(null); // Ошибки
@@ -256,4 +256,3 @@ const CertificateList = () => {
   );
 };
 
-export default CertificateList;
