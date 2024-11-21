@@ -167,7 +167,7 @@ export const CertificateList = () => {
   // Функция для загрузки данных
   const fetchCertificates = async () => {
     try {
-      const response = await fetch("https://sycret.ru/service/api/api", {
+      const response = await fetch("/api", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
