@@ -81,7 +81,6 @@ try {
     }
 
     const result = await response.json();
-    console.log(result)
     if (result.result !== 0) {
       throw new Error(result.resultdescription || "Ошибка при сохранении данных");
     }
