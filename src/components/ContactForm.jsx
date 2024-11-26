@@ -49,7 +49,7 @@ const handleSubmit = async (e) => {
   setIsSubmitting(true);
 
 try {
-    const response = await fetch("http://localhost:8080/proxy", {
+    const response = await fetch("https://hh-backend-test-1.onrender.com/proxy", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
